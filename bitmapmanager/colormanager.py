@@ -38,10 +38,15 @@ class BitmapManager:
             for x in range(self.bitmap.width):
                 self.bitmap[x, y] = self._get_index_for(color)
 
-    def render_image(self, img_path, offset_x=0, offset_y=0):
-        img = json.load(open(img_path, "r"))
-        for y in range(len(img)):
-            for x in range(len(img[y])): # Use current line size incase you modify the image
-                color = img[y][x]
+    def render_image_data(self, data, offset_x=0, offset_y=0):
+        for y in range(len(data)):
+            for x in range(len(data[y])): # Use current line size incase you modify the image
+                color = data[y][x]
                 if color != -1:
                     self.place(x+offset_x, y+offset_y, color)
+
+
+
+    def render_image_file(self, img_path, offset_x=0, offset_y=0):
+        img = json.load(open(img_path, "r"))
+        self.render_image_data(img, offset_x, offset_y)
