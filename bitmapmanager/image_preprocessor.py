@@ -31,6 +31,11 @@ for y in range(img.height):
 
     map.append(line)
 
+def remove_empty_last_pixels(matrix):
+    return [row[:next((i for i, x in enumerate(reversed(row)) if x != -1), len(row)) * -1] for row in matrix]
+
+map = remove_empty_last_pixels(map)
+
 # Remove spaces for file size
 content = json.dumps(map)
 content = content.replace(" ", "")
